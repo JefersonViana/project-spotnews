@@ -28,8 +28,8 @@ class News(models.Model):
     )
     content = models.TextField(blank=False, null=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateField(auto_now_add=True)
-    image = models.ImageField(upload_to="img/", null=False)
+    created_at = models.DateField()
+    image = models.ImageField(upload_to="img/", null=False, blank=True)
     categories = models.ManyToManyField(Category, blank=False)
 
     def __str__(self):
