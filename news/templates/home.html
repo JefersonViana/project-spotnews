@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+    <header class="header">
+      <ul class="header-links">
+        <li>
+          <a href="{% url 'home-page' %}">Home</a>
+        </li>
+      </ul>
+    </header>
+    <main class="news-container">
+      {% for new in news %}
+        <div class="news-card">
+          <h2 class="news-title">{{ new.title }}</h2>
+          {% if new.image %}
+            <img class="news-image" src="{% static new.image.url %}" alt="{{ new.title }}" />
+          {% endif %}
+          <span class="news-date">{{ new.created_at|date:"d/m/Y" }}</span>
+        </div>
+      {% endfor %}
+    </main>
+{% endblock %}
