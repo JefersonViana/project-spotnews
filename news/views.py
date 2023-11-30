@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import News
-from .forms import CreateNewsModelForm
+from .forms import CreateCategoriesModelForm, CreateNewsModelForm
 
 
 def homepage(request):
@@ -13,12 +13,23 @@ def news_detail(request, id):
     return render(request, 'news_details.html', context)
 
 
+def create_categories(request):
+    if request.method == 'POST':
+        form = CreateCategoriesModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home-page')
+
+    form = CreateCategoriesModelForm()
+    return render(request, 'categories_form.html', {'form': form})
+
+
 def create_news(request):
     if request.method == 'POST':
-        form = CreateNewsModelForm(request.POST)
+        form = CreateNewsModelForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home-page')
 
     form = CreateNewsModelForm()
-    return render(request, 'categories_form.html', {'form': form})
+    return render(request, 'news_form.html', {'form': form})
