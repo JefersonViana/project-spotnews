@@ -19,10 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from news_rest.views.category_view import CategoryViewSet
+from news_rest.views.user_view import UserViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r"api/categories", CategoryViewSet)
+router.register(r"api/users", UserViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
